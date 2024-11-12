@@ -1,5 +1,10 @@
 pipeline{
    agent any
+
+   environment{
+      DOCKERHUB_CREDENTIALS = "docker-hub"
+   }
+
    stages {
       stage("Permission"){
            steps{
@@ -39,9 +44,16 @@ pipeline{
        }
        stage("Docker Image Build"){
          steps{
-             sh "docker build -t calculator ."
+             sh "docker build -t bestlalala/calculator ."
          }
        }
+
+       stage('docker hub login'){
+         steps{
+             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+         }
+       }
+
 
    }
 }
