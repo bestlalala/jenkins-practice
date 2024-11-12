@@ -54,6 +54,11 @@ pipeline{
          }
        }
 
+       stage('docker hub push'){
+         steps{
+             sh 'docker push bestlalala/calculator:latest'
+         }
+       }
 
    }
 }
